@@ -83,7 +83,7 @@ if [ $APT_STATUS -eq 0 ];then
 
   CMD_PYTHON_INSTALL="sudo apt update && sudo apt install -y python3"
   CMD_PYTHON_SYMLINK="sudo ln -s $PYTHON_PATH/python3 $BIN_PATH/python"
-  CMD_PIP_SYMLINK="sudo ln -s $PIP_PATH/pip3 $BIN_PATH/pip3"
+  CMD_PIP_SYMLINK="sudo ln -s $PIP_PATH/pip3 $BIN_PATH/pip"
   CMD_PIP_CODECOMMIT_HELPER="sudo pip3 install git-remote-codecommit"
   CMD_PIP_AWSCLI="sudo pip3 install awscli"
 
@@ -97,7 +97,7 @@ elif [ $YUM_STATUS -eq 0 ]; then
 
   CMD_PYTHON_INSTALL="sudo yum install -y python3"
   CMD_PYTHON_SYMLINK="sudo ln -s $PYTHON_PATH/python3 $BIN_PATH/python"
-  CMD_PIP_SYMLINK="sudo ln -s $PIP_PATH/pip3 $BIN_PATH/pip3"
+  CMD_PIP_SYMLINK="sudo ln -s $PIP_PATH/pip3 $BIN_PATH/pip"
   CMD_PIP_CODECOMMIT_HELPER="sudo pip3 install git-remote-codecommit"
   CMD_PIP_AWSCLI="sudo pip3 install awscli"
 
@@ -111,7 +111,7 @@ elif [ `uname` == "Darwin" ]; then
 
   CMD_PYTHON_INSTALL="brew install -f python@3.9"
   CMD_PYTHON_SYMLINK="ln -s $PYTHON_PATH/python3 $BIN_PATH/python"
-  CMD_PIP_SYMLINK="ln -s $PIP_PATH/pip3 $BIN_PATH/pip3"
+  CMD_PIP_SYMLINK="ln -s $PIP_PATH/pip3 $BIN_PATH/pip"
   CMD_PIP_CODECOMMIT_HELPER="pip3 install git-remote-codecommit"
   CMD_PIP_AWSCLI="pip3 install awscli"
 
