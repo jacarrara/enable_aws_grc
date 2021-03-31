@@ -91,14 +91,17 @@ if [ $APT_STATUS -eq 0 ];then
   echo -e "${BLUE}[-]${NC} Ubuntu/Debian o distro derivada detectada"
 
   CMD_PYTHON_INSTALL="sudo apt update && sudo apt install -y python3"
-  CMD_PYTHON_SYMLINK="sudo ln -s $PYTHON_PATH/python3 $BIN_PATH/python"
-  CMD_PIP_SYMLINK="sudo ln -s $PIP_PATH/pip3 $BIN_PATH/pip"
+  
   CMD_PIP_CODECOMMIT_HELPER="sudo pip3 install git-remote-codecommit"
   CMD_PIP_AWSCLI="sudo pip3 install awscli"
 
   instalar_python3;
-  PYTHON_PATH=`which python3 | sed 's/python3//g'`
-  PIP_PATH=`which pip3 | sed 's/pip3//g'`
+  
+  PYTHON_PATH=`which python3`
+  PIP_PATH=`which pip3`
+  CMD_PYTHON_SYMLINK="sudo ln -s $PYTHON_PATH $BIN_PATH/python"
+  CMD_PIP_SYMLINK="sudo ln -s $PIP_PATH $BIN_PATH/pip"
+
   crear_symlinks;
   instalar_codecommit_helper;
 
@@ -107,14 +110,16 @@ elif [ $YUM_STATUS -eq 0 ]; then
   echo -e "${BLUE}[-]${NC} Redhat o distro derivada detectada"
 
   CMD_PYTHON_INSTALL="sudo yum install -y python3"
-  CMD_PYTHON_SYMLINK="sudo ln -s $PYTHON_PATH/python3 $BIN_PATH/python"
-  CMD_PIP_SYMLINK="sudo ln -s $PIP_PATH/pip3 $BIN_PATH/pip"
+  
   CMD_PIP_CODECOMMIT_HELPER="sudo pip3 install git-remote-codecommit"
   CMD_PIP_AWSCLI="sudo pip3 install awscli"
 
   instalar_python3;
-  PYTHON_PATH=`which python3 | sed 's/python3//g'`
-  PIP_PATH=`which pip3 | sed 's/pip3//g'`
+
+  PYTHON_PATH=`which python3`
+  PIP_PATH=`which pip3`
+  CMD_PYTHON_SYMLINK="sudo ln -s $PYTHON_PATH $BIN_PATH/python"
+  CMD_PIP_SYMLINK="sudo ln -s $PIP_PATH $BIN_PATH/pip"
 
   crear_symlinks;
   instalar_codecommit_helper;
@@ -124,8 +129,7 @@ elif [ `uname` == "Darwin" ]; then
   echo -e "${BLUE}[-]${NC} MacOS detectado"
 
   CMD_PYTHON_INSTALL="brew install -f python@3.9"
-  CMD_PYTHON_SYMLINK="ln -s $PYTHON_PATH/python3 $BIN_PATH/python"
-  CMD_PIP_SYMLINK="ln -s $PIP_PATH/pip3 $BIN_PATH/pip"
+  
   CMD_PIP_CODECOMMIT_HELPER="pip3 install git-remote-codecommit"
   CMD_PIP_AWSCLI="pip3 install awscli"
 
@@ -147,8 +151,11 @@ elif [ `uname` == "Darwin" ]; then
   fi
 
   instalar_python3;
-  PYTHON_PATH=`which python3 | sed 's/python3//g'`
-  PIP_PATH=`which pip3 | sed 's/pip3//g'`
+
+  PYTHON_PATH=`which python3`
+  PIP_PATH=`which pip3`
+  CMD_PYTHON_SYMLINK="ln -s $PYTHON_PATH $BIN_PATH/python"
+  CMD_PIP_SYMLINK="ln -s $PIP_PATH $BIN_PATH/pip"
 
   crear_symlinks;
   instalar_codecommit_helper;
