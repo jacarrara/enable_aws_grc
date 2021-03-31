@@ -8,7 +8,7 @@ NC='\033[0m'
 
 function instalar_python3 (){
   echo -e "${BLUE}[-]${NC} Verificando instalación de python3"
-  `python3 --version  &>/dev/null`
+  `python3 --version  &>/dev/null && pip3 --version &>/dev/null`
   if [ $? -eq 0 ]; then
     echo -e "${GREEN}OK${NC}"
     echo
@@ -79,7 +79,7 @@ function instalar_codecommit_helper (){
   fi
 }
 
-`apt &>/dev/null`
+`apt --version &>/dev/null`
 APT_STATUS=$?
 `yum &>/dev/null`
 YUM_STATUS=$?
@@ -90,7 +90,7 @@ if [ $APT_STATUS -eq 0 ];then
   # Ubuntu and related distros
   echo -e "${BLUE}[-]${NC} Ubuntu/Debian o distro derivada detectada"
 
-  CMD_PYTHON_INSTALL="sudo apt update && sudo apt install -y python3"
+  CMD_PYTHON_INSTALL="sudo apt update && sudo apt install -y python3 python3-pip"
   
   CMD_PIP_CODECOMMIT_HELPER="sudo pip3 install git-remote-codecommit"
   CMD_PIP_AWSCLI="sudo pip3 install awscli"
