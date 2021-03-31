@@ -22,8 +22,6 @@ function instalar_python3 (){
     else 
       echo -e "${GREEN}OK${NC}"
       echo
-      PYTHON_PATH=`which python3 | sed 's/python3//g'`
-      PIP_PATH=`which pip3 | sed 's/pip3//g'`
     fi
   fi
 }
@@ -33,19 +31,29 @@ function crear_symlinks (){
 
   if [ ! -f $BIN_PATH/python ]; then
     $CMD_PYTHON_SYMLINK
+
+    if [ $? -ne 0 ]; then
+      echo -e "${RED}Hubo un error..${NC}"
+      exit 1
+    else 
+      echo -e "${GREEN}OK${NC}"
+      echo
+    fi
   fi
 
   if [ ! -f $BIN_PATH/pip ]; then
     $CMD_PIP_SYMLINK
+
+    if [ $? -ne 0 ]; then
+      echo -e "${RED}Hubo un error..${NC}"
+      exit 1
+    else 
+      echo -e "${GREEN}OK${NC}"
+      echo
+    fi
   fi
 
-  if [ $? -ne 0 ]; then
-    echo -e "${RED}Hubo un error..${NC}"
-    exit 1
-  else 
-    echo -e "${GREEN}OK${NC}"
-    echo
-  fi
+  
 }
 
 function instalar_codecommit_helper (){
@@ -77,8 +85,6 @@ APT_STATUS=$?
 YUM_STATUS=$?
 
 BIN_PATH="/usr/local/bin"
-PYTHON_PATH=""
-PIP_PATH=""
 
 if [ $APT_STATUS -eq 0 ];then
   # Ubuntu and related distros
@@ -91,6 +97,8 @@ if [ $APT_STATUS -eq 0 ];then
   CMD_PIP_AWSCLI="sudo pip3 install awscli"
 
   instalar_python3;
+  PYTHON_PATH=`which python3 | sed 's/python3//g'`
+  PIP_PATH=`which pip3 | sed 's/pip3//g'`
   crear_symlinks;
   instalar_codecommit_helper;
 
@@ -105,6 +113,9 @@ elif [ $YUM_STATUS -eq 0 ]; then
   CMD_PIP_AWSCLI="sudo pip3 install awscli"
 
   instalar_python3;
+  PYTHON_PATH=`which python3 | sed 's/python3//g'`
+  PIP_PATH=`which pip3 | sed 's/pip3//g'`
+
   crear_symlinks;
   instalar_codecommit_helper;
 
@@ -136,6 +147,9 @@ elif [ `uname` == "Darwin" ]; then
   fi
 
   instalar_python3;
+  PYTHON_PATH=`which python3 | sed 's/python3//g'`
+  PIP_PATH=`which pip3 | sed 's/pip3//g'`
+
   crear_symlinks;
   instalar_codecommit_helper;
 
