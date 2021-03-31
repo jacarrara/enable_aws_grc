@@ -30,7 +30,6 @@ function instalar_python3 (){
 
 function crear_symlinks (){
   echo -e "${BLUE}[-]${NC} Creando symlinks"
-  BIN_PATH="/usr/local/bin"
 
   if [ ! -f $BIN_PATH/python ]; then
     $CMD_PYTHON_SYMLINK
@@ -76,6 +75,10 @@ function instalar_codecommit_helper (){
 APT_STATUS=$?
 `yum &>/dev/null`
 YUM_STATUS=$?
+
+BIN_PATH="/usr/local/bin"
+PYTHON_PATH=""
+PIP_PATH=""
 
 if [ $APT_STATUS -eq 0 ];then
   # Ubuntu and related distros
