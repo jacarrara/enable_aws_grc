@@ -14,7 +14,7 @@ function instalar_python3 (){
     echo
   else
     echo -e "${BLUE}[-]${NC} Instalando python 3"
-    $CMD_PYTHON_INSTALL
+    eval $CMD_PYTHON_INSTALL
 
     if [ $? -ne 0 ]; then
       echo -e "${RED}Hubo un error..${NC}"
